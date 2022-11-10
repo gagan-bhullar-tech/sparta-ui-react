@@ -20,6 +20,7 @@ const NavBarContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   background: white;
+  margin-bottom: 2rem;
 `;
 
 const LeftSection = styled.div`

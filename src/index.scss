@@ -1,13 +1,12 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "@fortawesome/fontawesome-free/css/all.css";
+@import "react-toastify/dist/ReactToastify.css";
 
 $theme-gray: #c3cfd9;
 $theme-primary-color: #084298e6;
 $theme-primary-color-dark: #003e99;
 $theme-secondary-color: #1021a2;
 $theme-primary-color-lightest: #a1b4cee6;
-$theme-primary-color-lighter: #ffd1c3;
-$theme-primary-color-text: #f8a990;
 $theme-primary: linear-gradient(
   to bottom right,
   $theme-primary-color,
@@ -63,8 +62,7 @@ body {
     color: $theme-primary-color;
   }
   &:hover {
-    color: $theme-primary-color;
-    background: $theme-primary-color-lighter;
+    background: $theme-primary-color-lightest;
   }
   &:disabled {
     color: $theme-gray;
@@ -84,4 +82,27 @@ body {
   .MuiCard-root:hover {
     background-color: $theme-primary-color-lightest;
   }
+}
+
+.card {
+  border: 2px solid $theme-primary-color-lightest;
+  padding: 3rem 4rem;
+  max-width: 700px;
+  margin: auto;
+}
+
+.container-padding-bottom {
+  padding-bottom: 100px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    padding: 1rem 2rem;
+  }
+}
+
+.version-label {
+  font-weight: bold;
+  color: $theme-primary-color-lightest;
+  margin: 0 auto 10px;
 }
