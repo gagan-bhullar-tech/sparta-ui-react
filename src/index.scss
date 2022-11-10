@@ -1,0 +1,68 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+$theme-gray: #c3cfd9;
+$theme-primary-color: #084298e6;
+$theme-primary-color-dark: #003e99;
+$theme-secondary-color: #1021a2;
+$theme-primary-color-lightest: #ffefe9;
+$theme-primary-color-lighter: #ffd1c3;
+$theme-primary-color-text: #f8a990;
+$theme-primary: linear-gradient(to bottom right, $theme-primary-color, $theme-secondary-color);
+$theme-primary-band: #eee; //linear-gradient(to bottom right, #ffbaa4, #ff916f);
+$theme-primary-dark: linear-gradient(to bottom right, $theme-secondary-color, $theme-primary-color);
+$error: red;
+
+body {
+    margin: 0;
+    font-family: "Avenir LT Std", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    * {
+        font-family: "Avenir LT Std", sans-serif;
+    }
+}
+
+.btn {
+    padding: 0.5rem 0.75rem;
+}
+.btn.btn-primary {
+    transition: background 300ms;
+    background: $theme-primary;
+    border-color: $theme-primary-color !important;
+    .fas,
+    .far {
+        color: white;
+    }
+    &:hover {
+        background: $theme-primary-dark;
+    }
+    &:disabled {
+        border-color: $theme-gray !important;
+        background: $theme-gray;
+    }
+}
+
+.btn.btn-outline-primary,
+.button.button-outline-primary {
+    transition: background 300ms;
+    color: $theme-primary-color;
+    border-color: $theme-primary-color;
+    .fas,
+    .far {
+        color: $theme-primary-color;
+    }
+    &:hover {
+        color: $theme-primary-color;
+        background: $theme-primary-color-lighter;
+    }
+    &:disabled {
+        color: $theme-gray;
+        border-color: $theme-gray;
+        .fas,
+        .far {
+            color: $theme-gray;
+        }
+    }
+}
