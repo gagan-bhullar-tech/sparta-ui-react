@@ -21,6 +21,7 @@ export const inputStyles = {
 export interface ICapitalFormData {
   scotiaBankAmount: number;
   rbcBankAmount: number;
+  rbcBusinessBankAmount: number;
   cibcBankAmount: number;
   tangerineBankAmount: number;
   simpliiBankAmount: number;
@@ -40,6 +41,7 @@ const Capital: FC = () => {
       defaultValues: {
         scotiaBankAmount: 0,
         rbcBankAmount: 0,
+        rbcBusinessBankAmount: 0,
         cibcBankAmount: 0,
         tangerineBankAmount: 0,
         simpliiBankAmount: 0,
@@ -67,6 +69,13 @@ const Capital: FC = () => {
         setValue(
           "rbcBankAmount",
           getDepositValueByBankName(response.capital.deposits, BankName.RBC)
+        );
+        setValue(
+          "rbcBusinessBankAmount",
+          getDepositValueByBankName(
+            response.capital.deposits,
+            BankName.RBC_BUSINESS
+          )
         );
         setValue(
           "cibcBankAmount",
@@ -104,6 +113,10 @@ const Capital: FC = () => {
             BankName.ScotiaBank
           ),
           getDepositValueByBankName(response.capital.deposits, BankName.RBC),
+          getDepositValueByBankName(
+            response.capital.deposits,
+            BankName.RBC_BUSINESS
+          ),
           getDepositValueByBankName(response.capital.deposits, BankName.CIBC),
           getDepositValueByBankName(
             response.capital.deposits,
@@ -135,6 +148,7 @@ const Capital: FC = () => {
   const calculateTotalAmount = (
     scotiaBankAmount: number = 0,
     rbcBankAmount: number = 0,
+    rbcBusinessBankAmount: number = 0,
     cibcBankAmount: number = 0,
     tangerineBankAmount: number = 0,
     simpliiBankAmount: number = 0,
@@ -145,6 +159,7 @@ const Capital: FC = () => {
     const total =
       scotiaBankAmount +
       rbcBankAmount +
+      rbcBusinessBankAmount +
       cibcBankAmount +
       tangerineBankAmount +
       simpliiBankAmount +
@@ -179,6 +194,10 @@ const Capital: FC = () => {
           {
             bank_name: BankName.RBC,
             amount: +data.rbcBankAmount,
+          },
+          {
+            bank_name: BankName.RBC_BUSINESS,
+            amount: +data.rbcBusinessBankAmount,
           },
           {
             bank_name: BankName.CIBC,
@@ -319,6 +338,32 @@ const Capital: FC = () => {
             />
             {formState.errors.rbcBankAmount &&
               formState.touchedFields.rbcBankAmount && (
+                <Error>Amount is required</Error>
+              )}
+          </div>
+        </div>
+        <div className="row mb-2 justify-content-center align-items-center">
+          <div className="col-5">
+            <label>RBC Business ($)</label>
+          </div>
+          <div className="col-5 p-1">
+            <input
+              className={
+                "w-100 " +
+                (formState.errors.rbcBusinessBankAmount &&
+                formState.touchedFields.rbcBusinessBankAmount
+                  ? "error"
+                  : "")
+              }
+              placeholder="Enter RBC business amount ($)"
+              style={{ ...inputStyles, fontSize: "16px" }}
+              disabled={!editDeposit}
+              type="number"
+              step=".01"
+              {...register("rbcBusinessBankAmount", { required: true })}
+            />
+            {formState.errors.rbcBusinessBankAmount &&
+              formState.touchedFields.rbcBusinessBankAmount && (
                 <Error>Amount is required</Error>
               )}
           </div>
