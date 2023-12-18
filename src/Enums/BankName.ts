@@ -8,4 +8,5 @@ export enum BankName {
   EQ = "EQ",
   PCFinancial = "PC Financial",
   TD = "TD",
+  ATB = "ATB",
 }

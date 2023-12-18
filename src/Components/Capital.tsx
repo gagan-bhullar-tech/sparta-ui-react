@@ -28,6 +28,7 @@ export interface ICapitalFormData {
   eqBankAmount: number;
   pcFinancialBankAmount: number;
   tdBankAmount: number;
+  atbBankAccount: number;
   totalAmount: number;
   despositDescription: string;
 }
@@ -48,6 +49,7 @@ const Capital: FC = () => {
         eqBankAmount: 0,
         pcFinancialBankAmount: 0,
         tdBankAmount: 0,
+        atbBankAccount: 0,
         totalAmount: 0,
         despositDescription: "",
       },
@@ -107,6 +109,10 @@ const Capital: FC = () => {
           "tdBankAmount",
           getDepositValueByBankName(response.capital.deposits, BankName.TD)
         );
+        setValue(
+          "atbBankAccount",
+          getDepositValueByBankName(response.capital.deposits, BankName.ATB)
+        );
         calculateTotalAmount(
           getDepositValueByBankName(
             response.capital.deposits,
@@ -131,7 +137,8 @@ const Capital: FC = () => {
             response.capital.deposits,
             BankName.PCFinancial
           ),
-          getDepositValueByBankName(response.capital.deposits, BankName.TD)
+          getDepositValueByBankName(response.capital.deposits, BankName.TD),
+          getDepositValueByBankName(response.capital.deposits, BankName.ATB)
         );
       }
     } catch (error) {
@@ -154,7 +161,8 @@ const Capital: FC = () => {
     simpliiBankAmount: number = 0,
     eqBankAmount: number = 0,
     pcFinancialBankAmount: number = 0,
-    tdBankAmount: number = 0
+    tdBankAmount: number = 0,
+    atbBankAccount: number = 0
   ) => {
     const total =
       scotiaBankAmount +
@@ -165,7 +173,8 @@ const Capital: FC = () => {
       simpliiBankAmount +
       eqBankAmount +
       pcFinancialBankAmount +
-      tdBankAmount;
+      tdBankAmount +
+      atbBankAccount;
     setValue("totalAmount", +total?.toFixed(2));
   };
 
@@ -222,6 +231,10 @@ const Capital: FC = () => {
           {
             bank_name: BankName.TD,
             amount: +data.tdBankAmount,
+          },
+          {
+            bank_name: BankName.ATB,
+            amount: +data.atbBankAccount,
           },
         ],
         depositDescription: data.despositDescription,
@@ -520,6 +533,32 @@ const Capital: FC = () => {
             />
             {formState.errors.tdBankAmount &&
               formState.touchedFields.tdBankAmount && (
+                <Error>Amount is required</Error>
+              )}
+          </div>
+        </div>
+        <div className="row mb-2 justify-content-center align-items-center">
+          <div className="col-5">
+            <label>ATB ($)</label>
+          </div>
+          <div className="col-5 p-1">
+            <input
+              className={
+                "w-100 " +
+                (formState.errors.atbBankAccount &&
+                formState.touchedFields.atbBankAccount
+                  ? "error"
+                  : "")
+              }
+              placeholder="Enter ATB amount ($)"
+              style={{ ...inputStyles, fontSize: "16px" }}
+              disabled={!editDeposit}
+              type="number"
+              step=".01"
+              {...register("atbBankAccount", { required: true })}
+            />
+            {formState.errors.atbBankAccount &&
+              formState.touchedFields.atbBankAccount && (
                 <Error>Amount is required</Error>
               )}
           </div>
